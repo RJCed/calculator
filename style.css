@@ -32,6 +32,9 @@ body{
     border-bottom: 9px solid #4e494a;
 }
 
+
+/* Upper Part, contains display and top text */
+
 #upper{
     background-color: #242424;
     border-top-left-radius: 2vw;
@@ -43,6 +46,7 @@ body{
     gap: 1vw;
     padding-bottom: 25px;
 }
+
 
 #top{
     display: flex;
@@ -85,3 +89,7 @@ body{
     height: 100px;
     background-color: #d1e3e3;
 }
+
+
+
+/* Lower Part, contains the buttons */
