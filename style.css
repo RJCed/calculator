@@ -170,20 +170,18 @@ body{
     }
 }
 
-.operator{
+.operator:not(#percent), #equal{
     background-color: #ff8c00;
     border: 2px solid #794302;
     box-shadow: #794302 2px 2px 0 0;
 }
-.operator:hover {
+.operator:hover:not(#percent){
     background-color: #ffaa41;
 }
-.operator:active {
+.operator:active:not(#percent){
     box-shadow: #754100 2px 2px 0 0;
     transform: translate(1.5px, 1.5px);
 }
-
-
 
 .number{
     background-color: #474747;
@@ -196,3 +194,5 @@ body{
 .number:active {
     box-shadow: #2e2e2e 2px 2px 0 0;
     transform: translate(1.5px, 1.5px);
+}
+
