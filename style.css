@@ -30,6 +30,10 @@ body{
     padding-top: 6px;
     border-right: 9px solid #4e494a;
     border-bottom: 9px solid #4e494a;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
@@ -39,12 +43,14 @@ body{
     background-color: #242424;
     border-top-left-radius: 2vw;
     border-top-right-radius: 2vw;
+    border-bottom-left-radius: 0.5vw;
+    border-bottom-right-radius: 0.5vw;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1vw;
-    padding-bottom: 25px;
+    padding-bottom: 30px;
 }
 
 
@@ -88,6 +94,13 @@ body{
     width: 80%;
     height: 100px;
     background-color: #d1e3e3;
+
+    color: #373334;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size:5rem;
+    padding: 5px;
 }
 
 
@@ -98,10 +111,12 @@ body{
     display: flex;
     /* border: 1px solid red; */
     gap: 0.3vw;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     padding: 15px;
-    padding-right: 15px;
-    margin-left: 10px;
+    padding-right: 12px;
+    padding-top: 10px;
+    margin: 10px;
 }
 
 #first-column, #second-column, #third-column, #fourth-column{
@@ -133,7 +148,7 @@ body{
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    border-radius: 1vw;
+    border-radius: 20px;
 }
 
 .button:hover {
@@ -171,13 +186,13 @@ body{
 
 
 .number{
-    background-color: #505050;
-    border: 2px solid #2e2e2e;
-    box-shadow: #2b2b2b 2px 2px 0 0;
+    background-color: #474747;
+    border: 2px solid #36312b;
+    box-shadow: #463f37 2px 2px 0 0;
 }
 .number:hover {
-    background-color: #6b6b6b;
+    background-color: #6d6d6d;
 }
 .number:active {
-    box-shadow: #1f1f1f 2px 2px 0 0;
+    box-shadow: #2e2e2e 2px 2px 0 0;
     transform: translate(1.5px, 1.5px);
