@@ -1,3 +1,14 @@
+let firstNumber = "";
+let operator = "";
+let secondNumber = "";
+
+// If finish inputing first number
+let doneFirstInput = false;
+
+//Collection of numbers inputted 
+let firstNumArray = [];
+
+
 const buttonContainer = document.getElementById("button-container");
 
 // Gets the number input (from buttons)
@@ -11,8 +22,14 @@ buttonContainer.addEventListener('mousedown', (event) => {
     numberInput(numberVal);
 })
 
+// Get the operation used
+
+
+
 function numberInput(num){
-    console.log(typeof num);
+    firstNumArray.push(num);
+    firstNumber = firstNumArray.join('')
+    console.log(firstNumber)
 }
 
 const solve = function(firstNum, opt, secondNum){
