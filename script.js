@@ -139,11 +139,12 @@ const operatorInput = function(operator){
 
 const specialInput = function(input){
     switch (input){
-        case "clear":
+        case "clear": //CLEAR ALL (RESET)
             reset();
             console.log("Clear")
             break;
-        case "del":
+        
+        case "del": //Delete Single Digit
             if (secondNumber !== '' && !doneAnswer){
                 console.log(`Remove ${secondNumber[secondNumber.length - 1]}`)
                 secondNumber = String(secondNumber).slice(0, -1);
@@ -153,12 +154,12 @@ const specialInput = function(input){
                 console.log(`Remove ${operator}`)
                 doneOperation = false;
                 doneFirstInput = false;
-                operator = '';
+                
                 changeDisplay();
             } else if ((secondNumber === '' && operator === '' && firstNumber !== '') || doneAnswer){
                 doneOperation = false;
                 doneFirstInput = false;
-                operator = '';
+                
 
                 console.log(firstNumber[firstNumber.length - 1])
                 console.log(`Remove ${firstNumber[firstNumber.length - 1]}`)
@@ -174,6 +175,10 @@ const specialInput = function(input){
             } else {
                 console.log("specialInput() Error")
             }
+            break;
+        
+        case 'changeSign':
+            console.log("YES")
     }
     // FOR DEL: You check if secondNumber is empthy and then operator, then first num, untill all empthy;
 }
@@ -211,6 +216,7 @@ buttonContainer.addEventListener('mousedown', (event) => {
         secondNumber = '';
         secondNumArray = [];
         doneOperation = false;
+        operator = '';
         
     } else if (special && special !== "period"){
         const specialVal = special.dataset.action;
