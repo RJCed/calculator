@@ -55,7 +55,9 @@ const changeDisplay = function(input){
     } else if (doneAnswer){
         display.textContent = finalAnswer;
         console.log("Final Answer Display Change")
-    }  
+    } else {
+        display.textContent = "|";
+    }
 }
 
 
@@ -81,6 +83,7 @@ const solve = function(firstNum, opt, secondNum){
 //Get the number inputed
 const numberInput = function(num){
     if (doneFirstInput === false){ // First Value
+        doneAnswer = false;
         if (num === '.' && (firstNumArray.length === 0 || firstNumArray.includes("."))){ //Checks if period is imputted mulitiple times
             console.log("Already Have Period/Period Cannot be First value")
         } else {
@@ -105,6 +108,7 @@ const numberInput = function(num){
 
 // Converts word into symbols for operation ex. "add" -> "+"  (this is also needed for changing this display)
 const operatorInput = function(operator){
+    doneAnswer = false;
     //usedOperator and changeDisplay both need to have the same value since they are both processed at different times
     switch (operator){
         case "divide":
@@ -139,7 +143,39 @@ const specialInput = function(input){
             reset();
             console.log("Clear")
             break;
+        case "del":
+            if (secondNumber !== '' && !doneAnswer){
+                console.log(`Remove ${secondNumber[secondNumber.length - 1]}`)
+                secondNumber = String(secondNumber).slice(0, -1);
+                secondNumArray = secondNumber.split('');
+                changeDisplay(usedOperator);
+            } else if (secondNumber === '' && operator !== '' && !doneAnswer){
+                console.log(`Remove ${operator}`)
+                doneOperation = false;
+                doneFirstInput = false;
+                operator = '';
+                changeDisplay();
+            } else if ((secondNumber === '' && operator === '' && firstNumber !== '') || doneAnswer){
+                doneOperation = false;
+                doneFirstInput = false;
+                operator = '';
+
+                console.log(firstNumber[firstNumber.length - 1])
+                console.log(`Remove ${firstNumber[firstNumber.length - 1]}`)
+                firstNumber = String(firstNumber).slice(0, -1);
+                firstNumArray = firstNumber.split('');
+                changeDisplay(usedOperator);
+
+                if(firstNumber === ''){
+                    display.textContent = '|';
+                    console.log("Nothing to remove, reset...")
+                    reset();
+                }
+            } else {
+                console.log("specialInput() Error")
+            }
     }
+    // FOR DEL: You check if secondNumber is empthy and then operator, then first num, untill all empthy;
 }
 
 // Gets the input (from buttons) ... also changes doneFirstInput if operator button is click
@@ -161,7 +197,6 @@ buttonContainer.addEventListener('mousedown', (event) => {
         console.log(operator)
     } else if (operatorButton && !doneOperation){
         doneOperation = true;
-        firstNumber = finalAnswer;
         const operatorVal = operatorButton.dataset.action;
         operator = operatorInput(operatorVal);
     }else if (equal && doneFirstInput && secondNumber !== '' && doneOperation){
@@ -169,13 +204,14 @@ buttonContainer.addEventListener('mousedown', (event) => {
         doneAnswer = true;
         changeDisplay();
         console.log(finalAnswer);
+        firstNumber = finalAnswer;
         
 
         //This is for the next interation
         secondNumber = '';
         secondNumArray = [];
         doneOperation = false;
-        doneAnswer = false;
+        
     } else if (special && special !== "period"){
         const specialVal = special.dataset.action;
         specialInput(specialVal);
