@@ -178,7 +178,20 @@ const specialInput = function(input){
             break;
         
         case 'changeSign':
-            console.log("YES")
+            if (secondNumber !== '' && !doneAnswer) {
+                console.log("Make Negative Second Number")
+                secondNumber = String(secondNumber * (-1));
+                secondNumArray = secondNumber.split('');
+                changeDisplay(usedOperator);
+            } else if (secondNumber === '' && operator === '' && firstNumber !== ''){
+                doneOperation = false;
+                doneFirstInput = false;
+                
+                console.log("Make Negative First Number")
+                firstNumber = String(firstNumber * (-1));
+                firstNumArray = firstNumber.split('');
+                changeDisplay(usedOperator);
+            }
     }
     // FOR DEL: You check if secondNumber is empthy and then operator, then first num, untill all empthy;
 }
