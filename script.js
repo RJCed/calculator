@@ -9,29 +9,8 @@ let doneFirstInput = false;
 let firstNumArray = [];
 
 
-const buttonContainer = document.getElementById("button-container");
 
-// Gets the number input (from buttons)
-buttonContainer.addEventListener('mousedown', (event) => {
-    const numberButton = event.target.closest('.number');
-
-    if (!numberButton) return;
-
-    const numberVal = numberButton.dataset.val;
-
-    numberInput(numberVal);
-})
-
-// Get the operation used
-
-
-
-function numberInput(num){
-    firstNumArray.push(num);
-    firstNumber = firstNumArray.join('')
-    console.log(firstNumber)
-}
-
+// Solve the given input
 const solve = function(firstNum, opt, secondNum){
     switch (opt){
         case "/":
@@ -49,3 +28,28 @@ const solve = function(firstNum, opt, secondNum){
             return "ERROR";
     }
 }
+
+//Get the number inputed
+const numberInput = function(num){
+    firstNumArray.push(num);
+    firstNumber = firstNumArray.join('')
+    console.log(firstNumber)
+}
+
+
+// Gets the input (from buttons)
+const buttonContainer = document.getElementById("button-container");
+buttonContainer.addEventListener('mousedown', (event) => {
+    const numberButton = event.target.closest('.number');
+    const operatorButton = event.target.closest('.operator');
+    
+
+    if (numberButton) {
+        const numberVal = numberButton.dataset.val;
+        numberInput(numberVal);
+    } else if (operatorButton && firstNumber !== '') {
+        doneFirstInput = true;
+        const operatorVal = operatorButton.dataset.action;
+        operator = operatorVal;
+    }
+})
