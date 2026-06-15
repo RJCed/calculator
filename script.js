@@ -1,7 +1,5 @@
-const firstNumber = Number(prompt("Your First Number: "));
-const operation = prompt("Operation: ");
-const secondNumber = Number(prompt("Your Second Number: "));
-
+const numbers = document.getElementsByClassName("number");
+console.log(numbers)
 
 const solve = function(firstNum, opt, secondNum){
     switch (opt){
