@@ -183,15 +183,15 @@ body{
     transform: translate(1.5px, 1.5px);
 }
 
-.number{
+.number:not(#period){
     background-color: #474747;
     border: 2px solid #36312b;
     box-shadow: #463f37 2px 2px 0 0;
 }
-.number:hover {
+.number:hover:not(#period) {
     background-color: #6d6d6d;
 }
-.number:active {
+.number:active:not(#period) {
     box-shadow: #2e2e2e 2px 2px 0 0;
     transform: translate(1.5px, 1.5px);
 }

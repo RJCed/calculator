@@ -50,8 +50,8 @@ const changeDisplay = function(input){
         display.textContent = `${firstNumber} ${input}`;
         console.log(`Operator Display Change ${input}`)
     } else if (doneAnswer === false && secondNumber !== ''){
-        display.textContent = `${firstNumber} ${input} ${secondNumber}`;
-        console.log(`Second Number Display Change ${input}`)
+        display.textContent = `${firstNumber} ${usedOperator} ${secondNumber}`;
+        console.log(`Second Number Display Change ${usedOperator}`)
     } else if (doneAnswer){
         display.textContent = finalAnswer;
         console.log("Final Answer Display Change")
@@ -80,16 +80,24 @@ const solve = function(firstNum, opt, secondNum){
 
 //Get the number inputed
 const numberInput = function(num){
-    if (doneFirstInput === false){
-        firstNumArray.push(num);
-        firstNumber = firstNumArray.join('')
-        changeDisplay();
-        console.log(firstNumber)
-    } else if (doneFirstInput){
-        secondNumArray.push(num);
-        secondNumber = secondNumArray.join('')
-        changeDisplay(usedOperator);
-        console.log(secondNumber);
+    if (doneFirstInput === false){ // First Value
+        if (num === '.' && (firstNumArray.length === 0 || firstNumArray.includes("."))){ //Checks if period is imputted mulitiple times
+            console.log("Already Have Period/Period Cannot be First value")
+        } else {
+            firstNumArray.push(num);
+            firstNumber = firstNumArray.join('')
+            changeDisplay();
+            console.log(firstNumber)
+        }
+    } else if (doneFirstInput){ //Second Value
+        if (num === '.' && (secondNumArray.length === 0 || secondNumArray.includes("."))){ //Checks if period is imputted mulitiple times
+            console.log("Already Have Period/Period Cannot be First value")
+        } else {
+            secondNumArray.push(num);
+            secondNumber = secondNumArray.join('')
+            changeDisplay();
+            console.log(secondNumber)
+        }
     }
     
 }
@@ -97,6 +105,7 @@ const numberInput = function(num){
 
 // Converts word into symbols for operation ex. "add" -> "+"  (this is also needed for changing this display)
 const operatorInput = function(operator){
+    //usedOperator and changeDisplay both need to have the same value since they are both processed at different times
     switch (operator){
         case "divide":
             usedOperator = "÷";
@@ -161,12 +170,13 @@ buttonContainer.addEventListener('mousedown', (event) => {
         changeDisplay();
         console.log(finalAnswer);
         
+
         //This is for the next interation
         secondNumber = '';
         secondNumArray = [];
         doneOperation = false;
         doneAnswer = false;
-    } else if (special){
+    } else if (special && special !== "period"){
         const specialVal = special.dataset.action;
         specialInput(specialVal);
     }
