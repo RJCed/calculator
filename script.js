@@ -49,6 +49,8 @@ const reset = function(){
 
     finalAnswer = '';
     doneAnswer = false;
+
+    display.textContent = "|";
 }
 
 // Solve the given input
@@ -116,12 +118,22 @@ const operatorInput = function(operator){
     }
 }
 
+const specialInput = function(input){
+    switch (input){
+        case "clear":
+            reset();
+            console.log("Clear")
+            break;
+    }
+}
+
 // Gets the input (from buttons) ... also changes doneFirstInput if operator button is click
 const buttonContainer = document.getElementById("button-container");
 buttonContainer.addEventListener('mousedown', (event) => {
     const numberButton = event.target.closest('.number');
     const operatorButton = event.target.closest('.operator');
     const equal = event.target.closest('#equal');
+    const special = event.target.closest('.special');
 
     if (numberButton) {
         const numberVal = numberButton.dataset.val;
@@ -135,5 +147,8 @@ buttonContainer.addEventListener('mousedown', (event) => {
         doneAnswer = true;
         changeDisplay();
         console.log(finalAnswer);
+    } else if (special){
+        const specialVal = special.dataset.action;
+        specialInput(specialVal);
     }
 })
