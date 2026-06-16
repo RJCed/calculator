@@ -28,13 +28,18 @@ body{
     padding: 7px;
     padding-left: 6px;
     padding-top: 6px;
+    margin: 50px;
     border-right: 9px solid #4e494a;
     border-bottom: 9px solid #4e494a;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    
 }
+
+
 
 
 /* Upper Part, contains display and top text */
@@ -49,8 +54,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1vw;
-    padding-bottom: 30px;
+    gap: 15px;
+    padding-bottom: 35px;
 }
 
 
@@ -127,7 +132,7 @@ body{
 #first-column, #second-column, #third-column, #fourth-column{
     display: flex;
     flex-direction: column;
-    min-width: 100px;
+    width: 100px;
     justify-content: center;
     gap: 0.3vw;
 
@@ -160,6 +165,8 @@ body{
     max-width: 100%;
     height: auto;
 }
+
+
 
 .button:hover {
     background-color: #949393;
@@ -197,3 +204,65 @@ body{
     transform: translate(1.5px, 1.5px);
 }
 
+
+
+@media (max-width: 600px) {
+
+    #container{
+        height: 500px;
+        width: 333px;
+    }
+
+
+    .button{
+        width: 60px;
+        font-size: 20px;   
+    }
+
+    #button-container{
+        margin: 0;
+    }
+
+    #first-column, #second-column, #third-column, #fourth-column{
+        width: 67px;
+    }
+
+    #fourth-column{
+        margin-left: 15px;
+    }
+
+
+    #solar{
+        width: 133px;
+        height: 33px;
+    }
+
+
+    #display{
+        width: 80%;
+        height: 67px;
+
+        font-size:3rem;
+    }
+
+    #upper{
+        border-top-left-radius: 2vw;
+        border-top-right-radius: 2vw;
+        border-bottom-left-radius: 0.5vw;
+        border-bottom-right-radius: 0.5vw;
+
+        gap: 10px;
+        padding-bottom: 23px;
+    }
+
+    #top a{
+        font-size: 23px;
+        width: 67px;
+
+    }
+    #top span{
+        text-align: right;
+        width: 67px;
+        font-size: 21px;
+    }
+}
