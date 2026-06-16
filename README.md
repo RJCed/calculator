@@ -13,6 +13,7 @@ A simple calculator built with **HTML, CSS, and JavaScript**.
   - Subtraction (-)
   - Multiplication (×)
   - Division (÷)
+  - Percentage (%)
 - Decimal support
 - Clear and delete functions
 - Keyboard-friendly design
