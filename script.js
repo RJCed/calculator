@@ -54,7 +54,7 @@ const changeDisplay = function(input){
         console.log(`Second Number Display Change ${usedOperator}`)
     } else if (doneAnswer){
 
-        // Checks greater then 11 (screen size) and if it has a decimal, if so it will round it
+        // Checks greater then 10 (screen size) and if it has a decimal, if so it will round it
         if (String(finalAnswer).split('').includes('.') && String(finalAnswer).length > 10){
             let rounded = Math.round(finalAnswer * 100) / 100
             finalAnswer = rounded;
@@ -64,7 +64,7 @@ const changeDisplay = function(input){
 
         display.textContent = finalAnswer;
         
-        // Checks if finalAnswer is still greater than 11 digits -> Console.log("Too Big!")
+        // Checks if finalAnswer is still greater than 10 digits -> Console.log("Too Big!")
         if (String(finalAnswer).length > 10){
             display.textContent = "Too Big!"
         }
