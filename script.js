@@ -126,18 +126,22 @@ const operatorInput = function(operator){
     doneAnswer = false;
     //usedOperator and changeDisplay both need to have the same value since they are both processed at different times
     switch (operator){
+        case "/":
         case "divide":
             usedOperator = "÷";
             changeDisplay("÷");
             return "/";
+        case "*":
         case "multiply":
             usedOperator = "×";
             changeDisplay("×");
             return "*";
+        case "-":
         case "subtract":
             usedOperator = "-";
             changeDisplay("-");
             return "-";
+        case "+":
         case "add":
             usedOperator = "+";
             changeDisplay("+");
@@ -211,7 +215,85 @@ const specialInput = function(input){
     // FOR DEL: You check if secondNumber is empthy and then operator, then first num, untill all empthy;
 }
 
-// Gets the input (from buttons) ... also changes doneFirstInput if operator button is click
+
+
+
+const toEqual = function(){
+    finalAnswer = solve(Number(firstNumber), operator, Number(secondNumber));
+    doneAnswer = true;
+    changeDisplay();
+    console.log(finalAnswer);
+    firstNumber = finalAnswer;
+    
+
+    //This is for the next interation
+    secondNumber = '';
+    secondNumArray = [];
+    doneOperation = false;
+    operator = '';
+}
+
+
+const toOperate = function(operatorButton){
+    doneOperation = true;
+    const operatorVal = operatorButton.dataset.action;
+    operator = operatorInput(operatorVal);
+    console.log(operator)
+}
+
+
+
+
+
+
+
+// Get keyboard input
+window.addEventListener('keydown', (event) => {
+    const validNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+    const validOpCode = ["+", "-", "/", "*"];
+    const specialCase = ["Backspace", "Enter"];
+
+    
+    
+    if ((validNumbers.includes(event.key) || validOpCode.includes(event.key)) || specialCase.includes(event.key)){
+        event.preventDefault();
+        console.log('KeyPress')
+    }
+    
+
+    // For Valid Numbers (event.key)
+    if (validNumbers.includes(event.key)) {
+        const numberKey = event.key;
+        numberInput(numberKey);
+    }
+    
+
+    // For ValidOpCode (event.key)
+    if (validOpCode.includes(event.key) && !doneFirstInput && !doneOperation && firstNumber !== '') {
+        doneFirstInput = true;
+        doneOperation = true;
+        
+        const operatorkey = event.key;
+        operator = operatorInput(operatorkey);
+        console.log(operator)
+    } else if (validOpCode.includes(event.key) && !doneOperation && doneFirstInput){ // This is for the second iteration
+        doneOperation = true;
+        const operatorkey = event.key;
+        operator = operatorInput(operatorkey);
+        console.log(operator)
+    }
+
+
+    if (specialCase.includes(event.key) && doneFirstInput && secondNumber !== '' && doneOperation){
+        toEqual();           
+    }
+
+
+})
+
+
+
+// Gets the input (from buttons)
 const buttonContainer = document.getElementById("button-container");
 buttonContainer.addEventListener('mousedown', (event) => {
     const numberButton = event.target.closest('.number');
@@ -222,32 +304,18 @@ buttonContainer.addEventListener('mousedown', (event) => {
     if (numberButton) {
         const numberVal = numberButton.dataset.val;
         numberInput(numberVal);
-    } else if (operatorButton && !doneFirstInput && !doneOperation) {
-        doneOperation = true;
+    } else if (operatorButton && !doneFirstInput && !doneOperation && firstNumber !== '') {
         doneFirstInput = true;
-        const operatorVal = operatorButton.dataset.action;
-        operator = operatorInput(operatorVal);
-        console.log(operator)
-    } else if (operatorButton && !doneOperation){
-        doneOperation = true;
-        const operatorVal = operatorButton.dataset.action;
-        operator = operatorInput(operatorVal);
+        toOperate(operatorButton);
+    } else if (operatorButton && !doneOperation && doneFirstInput){ // This is for the second iteration
+        toOperate(operatorButton);
     }else if (equal && doneFirstInput && secondNumber !== '' && doneOperation){
-        finalAnswer = solve(Number(firstNumber), operator, Number(secondNumber));
-        doneAnswer = true;
-        changeDisplay();
-        console.log(finalAnswer);
-        firstNumber = finalAnswer;
-        
+        toEqual();
 
-        //This is for the next interation
-        secondNumber = '';
-        secondNumArray = [];
-        doneOperation = false;
-        operator = '';
-        
     } else if (special && special !== "period"){
         const specialVal = special.dataset.action;
         specialInput(specialVal);
     }
 })
+
+
