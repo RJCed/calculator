@@ -101,6 +101,11 @@ body{
     align-items: center;
     font-size:5rem;
     padding: 5px;
+
+    overflow: hidden;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: clip;
 }
 
 
