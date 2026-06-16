@@ -16,7 +16,7 @@ let finalAnswer = '';
 
 
 
-// reset everything (except final answer)
+// reset everything
 const reset = function(){
     firstNumber = '';
     operator = '';
