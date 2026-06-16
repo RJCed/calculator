@@ -155,7 +155,7 @@ const operatorInput = function(operator){
             return "ERROR";
     }
 }
-
+// For Clear, Del and ChangeSign
 const specialInput = function(input){
     switch (input){
         case "clear": //CLEAR ALL (RESET)
@@ -212,12 +212,11 @@ const specialInput = function(input){
                 changeDisplay(usedOperator);
             }
     }
-    // FOR DEL: You check if secondNumber is empthy and then operator, then first num, untill all empthy;
 }
 
 
 
-
+//When Equal or Operation is called
 const toEqual = function(){
     finalAnswer = solve(Number(firstNumber), operator, Number(secondNumber));
     doneAnswer = true;
@@ -232,16 +231,12 @@ const toEqual = function(){
     doneOperation = false;
     operator = '';
 }
-
-
-const toOperate = function(operatorButton){
+const toOperate = function(operatorVal){
     doneOperation = true;
-    const operatorVal = operatorButton.dataset.action;
+    
     operator = operatorInput(operatorVal);
     console.log(operator)
 }
-
-
 
 
 
@@ -253,45 +248,40 @@ window.addEventListener('keydown', (event) => {
     const validOpCode = ["+", "-", "/", "*"];
     const specialCase = ["Backspace", "Enter"];
 
-    
-    
+
+
     if ((validNumbers.includes(event.key) || validOpCode.includes(event.key)) || specialCase.includes(event.key)){
         event.preventDefault();
         console.log('KeyPress')
     }
-    
+
 
     // For Valid Numbers (event.key)
     if (validNumbers.includes(event.key)) {
         const numberKey = event.key;
         numberInput(numberKey);
     }
-    
+
 
     // For ValidOpCode (event.key)
     if (validOpCode.includes(event.key) && !doneFirstInput && !doneOperation && firstNumber !== '') {
-        doneFirstInput = true;
-        doneOperation = true;
-        
+        doneFirstInput = true;      
         const operatorkey = event.key;
-        operator = operatorInput(operatorkey);
-        console.log(operator)
+        toOperate(operatorkey);
     } else if (validOpCode.includes(event.key) && !doneOperation && doneFirstInput){ // This is for the second iteration
-        doneOperation = true;
         const operatorkey = event.key;
-        operator = operatorInput(operatorkey);
-        console.log(operator)
+        toOperate(operatorkey);
     }
 
 
-    if (specialCase.includes(event.key) && doneFirstInput && secondNumber !== '' && doneOperation){
+    // For Equal and Backspace/Del
+    if (specialCase.includes(event.key) && (event.key === "Enter") && doneFirstInput && secondNumber !== '' && doneOperation){
         toEqual();           
+    } else if (specialCase.includes(event.key) && (event.key === "Enter")){
+        const specialKey = event.key;
+        specialInput(specialKey);
     }
-
-
 })
-
-
 
 // Gets the input (from buttons)
 const buttonContainer = document.getElementById("button-container");
@@ -306,12 +296,13 @@ buttonContainer.addEventListener('mousedown', (event) => {
         numberInput(numberVal);
     } else if (operatorButton && !doneFirstInput && !doneOperation && firstNumber !== '') {
         doneFirstInput = true;
-        toOperate(operatorButton);
+        const operatorVal = operatorButton.dataset.action;
+        toOperate(operatorVal);
     } else if (operatorButton && !doneOperation && doneFirstInput){ // This is for the second iteration
-        toOperate(operatorButton);
+        const operatorVal = operatorButton.dataset.action;
+        toOperate(operatorVal);
     }else if (equal && doneFirstInput && secondNumber !== '' && doneOperation){
         toEqual();
-
     } else if (special && special !== "period"){
         const specialVal = special.dataset.action;
         specialInput(specialVal);
