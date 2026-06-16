@@ -107,7 +107,7 @@ const numberInput = function(num){
             changeDisplay();
             console.log(firstNumber)
         }
-    } else if (doneFirstInput){ //Second Value
+    } else if (doneFirstInput && doneOperation){ //Second Value
         if (num === '.' && (secondNumArray.length === 0 || secondNumArray.includes("."))){ //Checks if period is imputted mulitiple times
             console.log("Already Have Period/Period Cannot be First value")
         } else {
